@@ -1,5 +1,5 @@
 """
-Third Hand - backend. Built for the Great Indian AI Internship Challenge (Gnani AI).
+Machinery - backend.
 
 The WHOLE agent loop lives here now:
 
@@ -69,7 +69,7 @@ DEFAULT_MACHINE = "printer" if "printer" in MACHINES else next(iter(MACHINES))
 GNANI_API_KEY = os.getenv("GNANI_API_KEY", "")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "google/gemini-2.5-flash")
-TOOL_SECRET = os.getenv("TOOL_SECRET", "third-hand-dev")
+TOOL_SECRET = os.getenv("TOOL_SECRET", "machinery-dev")
 
 GNANI_BASE = "https://api.vachana.ai"
 GNANI_TTS_MODEL = "timbre-v3.0"   # every Timbre v3.0 voice speaks all 10 languages
@@ -89,7 +89,7 @@ GNANI_LANGS = {
 MAX_TOOL_ROUNDS = 6      # guard on the tool-calling loop
 LLM_MAX_TOKENS = 400     # spoken replies are short; a low cap = faster replies
 
-app = FastAPI(title="Third Hand")
+app = FastAPI(title="Machinery")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],          # hackathon setting. Tighten for anything real.
@@ -161,7 +161,7 @@ def _machine(requested: Optional[str]) -> Dict[str, Any]:
 SYSTEM_PROMPT = """
 # Who you are
 
-You are Third Hand. You guide someone who is standing at a real machine with
+You are Machinery. You guide someone who is standing at a real machine with
 their hands inside it. Their hands are busy and their eyes are on the hardware,
 not on you. You are their second pair of eyes and their memory.
 
@@ -573,7 +573,7 @@ def _tool_order_part(part_id: str, quantity: int = 1, machine: Optional[str] = N
             "guidance": part.get("notes", ""),
         }
     qty = max(1, min(int(quantity or 1), part["in_stock"]))
-    order_id = "TH-" + uuid.uuid4().hex[:6].upper()
+    order_id = "MCH-" + uuid.uuid4().hex[:6].upper()
     line = {
         "order_id": order_id,
         "part_id": part["id"],
@@ -1054,7 +1054,7 @@ async def tts(body: TtsIn) -> Dict[str, Any]:
 
 # --------------------------------------------------------------------------
 # HTTP WRAPPERS - the same six tools over plain HTTP, for curl testing and
-# for anything that wants to drive Third Hand without the voice loop.
+# for anything that wants to drive Machinery without the voice loop.
 # All of them take the machine name optionally; omit it and the backend uses
 # whatever the browser last switched to.
 # --------------------------------------------------------------------------

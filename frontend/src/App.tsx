@@ -45,7 +45,7 @@ export default function App() {
         <div className="brand">
           <span className="logo" />
           <div>
-            <h1>Third Hand</h1>
+            <h1>Machinery</h1>
             <p>a voice agent that can see what you are looking at</p>
           </div>
         </div>

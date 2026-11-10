@@ -40,7 +40,7 @@ const CALIBRATE_MS = 450       // room-noise sampling window before the intro
 
 /** The spoken intro when a session starts. Short on purpose - the user talks next. */
 const INTRO = (machine: string) =>
-  `Hey, I am Third Hand, your repair copilot. Tell me what is failing on the ` +
+  `Hey, I am Machinery, your repair copilot. Tell me what is failing on the ` +
   `${machine}, and I will walk you through the fix, step by step. So, what is ` +
   `the problem today?`
 

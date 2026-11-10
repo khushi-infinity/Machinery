@@ -182,7 +182,7 @@ export default function Labeller() {
               <button className="btn go" onClick={exportAll}>Export {included} parts</button>
             </>
           )}
-          <a className="lab-link" href="#">← back to Third Hand</a>
+          <a className="lab-link" href="#">← back to Machinery</a>
         </div>
       </header>
 

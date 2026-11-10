@@ -1,5 +1,5 @@
 """
-Smoke test for the four stages Third Hand runs on:
+Smoke test for the four stages Machinery runs on:
 
   1. gnani tts  - Gnani Timbre v3.0, voice Shivani, en-IN     -> WAV on disk
   2. gnani stt  - Gnani Prisma v3.0, indic-auto (round-trips clip #1)
@@ -102,7 +102,7 @@ try:
             "temperature": 0.2,
             "max_tokens": 200,
             "messages": [
-                {"role": "system", "content": "You are Third Hand, a repair agent. Use tools before answering."},
+                {"role": "system", "content": "You are Machinery, a repair agent. Use tools before answering."},
                 {"role": "user", "content": "I'm on the printer and the extruder is clicking."},
             ],
             "tools": [{

@@ -172,7 +172,7 @@ function GlbModel({ machine }: { machine: Machine }) {
       const name = part.meshName ?? part.id
       const node = root.getObjectByName(name)
       if (!node) {
-        console.warn(`[third-hand] "${machine.id}": no node named "${name}" in ${machine.glbUrl}`)
+        console.warn(`[machinery] "${machine.id}": no node named "${name}" in ${machine.glbUrl}`)
         continue
       }
       const mats: THREE.MeshStandardMaterial[] = []

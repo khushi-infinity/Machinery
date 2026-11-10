@@ -159,15 +159,15 @@ export const clientTools = {
 }
 
 /**
- * Prep-night affordance: drive the whole scene from the browser console while
- * the agent is offline.
+ * Console affordance: drive the whole scene from the browser DevTools while
+ * the agent is offline (handy for prep, tuning, and demos).
  *
- *   __th.switch_machine({ machine: 'mri' })
- *   __th.set_explode({ level: 0.7 })
- *   __th.focus_part({ part_id: 'gradient_coil', zoom: 1.4 })
- *   __th.highlight_part({ part_id: 'cold_head', label: 'listen for a knock' })
- *   __th.get_user_pointer()
+ *   machinery.switch_machine({ machine: 'mri' })
+ *   machinery.set_explode({ level: 0.7 })
+ *   machinery.focus_part({ part_id: 'gradient_coil', zoom: 1.4 })
+ *   machinery.highlight_part({ part_id: 'cold_head', label: 'listen for a knock' })
+ *   machinery.get_user_pointer()
  */
 if (typeof window !== 'undefined') {
-  ;(window as any).__th = clientTools
+  ;(window as any).machinery = clientTools
 }
