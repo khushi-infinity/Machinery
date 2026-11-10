@@ -68,7 +68,7 @@ DEFAULT_MACHINE = "printer" if "printer" in MACHINES else next(iter(MACHINES))
 # ---------------------------------------------------------------------------
 GNANI_API_KEY = os.getenv("GNANI_API_KEY", "")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
-OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "google/gemini-2.5-flash")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3.5-super-vl:free")
 TOOL_SECRET = os.getenv("TOOL_SECRET", "machinery-dev")
 
 GNANI_BASE = "https://api.vachana.ai"
@@ -88,6 +88,13 @@ GNANI_LANGS = {
 }
 MAX_TOOL_ROUNDS = 6      # guard on the tool-calling loop
 LLM_MAX_TOKENS = 400     # spoken replies are short; a low cap = faster replies
+
+# Nemotron (and other reasoning models on OpenRouter) think in hidden
+# "reasoning" tokens. With a small max_tokens the reasoning eats the whole
+# budget and the model returns finish_reason=length with EMPTY content - the
+# agent would go silent mid-demo. We ship reasoning: {enabled: false} so the
+# model answers directly. Models without reasoning support ignore the param.
+REASONING_OFF = {"enabled": False}
 
 app = FastAPI(title="Machinery")
 app.add_middleware(
@@ -660,6 +667,7 @@ def _tool_search_web(query: str) -> Dict[str, Any]:
             json={
                 "model": LLM_MODEL,
                 "max_tokens": 500,
+                "reasoning": REASONING_OFF,
                 "plugins": [{"id": "web", "max_results": 4}],
                 "messages": [{
                     "role": "user",
@@ -862,6 +870,7 @@ async def _agent_turn_events(body: TurnIn):
         "model": LLM_MODEL,
         "temperature": 0.2,
         "max_tokens": LLM_MAX_TOKENS,
+        "reasoning": REASONING_OFF,
         "messages": messages,
         "tools": TOOL_SCHEMAS,
         "tool_choice": "auto",
@@ -939,7 +948,13 @@ async def _agent_turn_events(body: TurnIn):
                 r = await client.post(
                     f"{OPENROUTER_BASE}/chat/completions",
                     headers=_openrouter_headers(),
-                    json={"model": LLM_MODEL, "temperature": 0.2, "max_tokens": LLM_MAX_TOKENS, "messages": messages},
+                    json={
+                        "model": LLM_MODEL,
+                        "temperature": 0.2,
+                        "max_tokens": LLM_MAX_TOKENS,
+                        "reasoning": REASONING_OFF,
+                        "messages": messages,
+                    },
                 )
                 speech = (r.json()["choices"][0]["message"].get("content") or "").strip() if r.status_code == 200 else ""
     except Exception as e:  # noqa: BLE001 - mid-stream we can only report in-band

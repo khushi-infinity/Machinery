@@ -123,7 +123,7 @@ voice, one model, one set of part names, from training to the job.
 |---|---|---|
 | Ears | **Gnani Prisma v3.0** STT | Every spoken utterance is uploaded (30 s WAV or less) to `api.vachana.ai/stt/v3` with `language_code=indic-auto`; the reply carries `transcript` **and** `detected_language_code` |
 | Voice | **Gnani Timbre v3.0** TTS | Every spoken reply goes to `api.vachana.ai/api/v1/tts/inference` in the language Prisma just heard; one voice speaks all 10 languages |
-| Brain | **OpenRouter** LLM | `google/gemini-2.5-flash` by default (swap via `OPENROUTER_MODEL`) drives the 14-tool loop with native function calling |
+| Brain | **OpenRouter** LLM | `nvidia/nemotron-3.5-super-vl:free` by default (swap via `OPENROUTER_MODEL`) drives the 14-tool loop with native function calling. The backend sends `reasoning: {enabled: false}`, so reasoning-heavy models cannot burn the token budget on hidden thinking and go silent. |
 | Live web | **OpenRouter web-search plugin** | `search_web` returns real answers plus citation URLs (rendered as source cards); `read_page` quotes one page |
 
 **The split that matters.** Anything that changes *what you see* is a client
@@ -244,7 +244,7 @@ From `backend/.env`:
 |---|---|---|
 | `GNANI_API_KEY` | (required) | Gnani API key, used for both STT and TTS |
 | `OPENROUTER_API_KEY` | (required) | OpenRouter key for the LLM and the web search |
-| `OPENROUTER_MODEL` | `google/gemini-2.5-flash` | Any OpenAI-compatible tool-calling chat model on OpenRouter, e.g. `openai/gpt-4o-mini` |
+| `OPENROUTER_MODEL` | `nvidia/nemotron-3.5-super-vl:free` | Free, fast, reliable tool calls. Any OpenAI-compatible tool-calling chat model on OpenRouter works, e.g. `openai/gpt-4o-mini` |
 | `GNANI_TTS_VOICE` | `Shivani` | Any Timbre v3.0 voice; see below |
 | `TOOL_SECRET` | `machinery-dev` | Shared secret the tool wrappers send as `X-Tool-Secret` |
 

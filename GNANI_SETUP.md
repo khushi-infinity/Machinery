@@ -69,7 +69,7 @@ curl -X POST https://api.vachana.ai/api/v1/tts/inference \
 curl https://openrouter.ai/api/v1/chat/completions \
   -H "Authorization: Bearer <OPENROUTER_KEY>" \
   -H "Content-Type: application/json" \
-  -d '{"model":"google/gemini-2.5-flash","messages":[{"role":"user","content":"hello"}]}'
+  -d '{"model":"nvidia/nemotron-3.5-super-vl:free","reasoning":{"enabled":false},"messages":[{"role":"user","content":"hello"}]}'
 ```
 
 ---
@@ -79,7 +79,7 @@ curl https://openrouter.ai/api/v1/chat/completions \
 | Role | Model | Notes |
 | --- | --- | --- |
 | Ears (STT) | **Gnani Prisma v3.0** (`prisma-v3.0`) | 10 Indian languages; `language_code=indic-auto` detects the language and returns it as `detected_language_code`, which flows straight to TTS, so Hindi in gives Hindi out. Handles code-mixed English Hindi. |
-| Brain (LLM) | **OpenRouter** (`OPENROUTER_MODEL`, default `google/gemini-2.5-flash`) | OpenAI-compatible endpoint with native tool calling; the whole 14-tool loop plugs in unchanged. Swap the model with one env var. |
+| Brain (LLM) | **OpenRouter** (`OPENROUTER_MODEL`, default `nvidia/nemotron-3.5-super-vl:free`) | OpenAI-compatible endpoint with native tool calling; the whole 14-tool loop plugs in unchanged. Free, fast (about 0.7 s per call), reliable tool calls. The backend sends `reasoning: {enabled: false}` so thinking-heavy models cannot eat the reply budget. Swap the model with one env var. |
 | Voice (TTS) | **Gnani Timbre v3.0** (`timbre-v3.0`, voice `Shivani`) | Every v3.0 voice speaks all 10 languages; pick the voice, set the language per reply. `speed: 1.05` for technician pace. |
 | Live web | **OpenRouter web-search plugin** (`plugins: [{"id":"web"}]`) | `search_web` gets real URLs back as annotations; `read_page` is a plain GET plus HTML stripping. |
 
@@ -114,7 +114,7 @@ There is no dashboard step.
 1. `python test_stack.py` → 4 checks pass
 2. `uvicorn main:app --reload --port 8000`, then `GET /api/health` shows
    `gnani_configured: true` and `openrouter_configured: true`, and models
-   `prisma-v3.0 / google/gemini-2.5-flash / timbre-v3.0`
+   `prisma-v3.0 / nvidia/nemotron-3.5-super-vl:free / timbre-v3.0`
 3. `curl -F "file=@artifacts/tts_check.wav" http://127.0.0.1:8000/api/stt` →
    the sentence comes back with `detected_language_code`
 4. Start the frontend, press **Start session**, say *"my extruder is clicking"*
@@ -132,5 +132,6 @@ There is no dashboard step.
 | 429 from Gnani | Rate limited: you sent a request while the previous one was still running. Always send the NEXT utterance only after the previous turn finished (the app already behaves this way). |
 | STT returns an empty `transcript` | Sub-second or silent audio. The voice detector only ships clips with real speech, so this is rare; an empty transcript is not an error. |
 | OpenRouter 401 | Key missing or expired. Check `OPENROUTER_API_KEY` in `backend/.env`. |
-| OpenRouter tool call never comes | Use a tool-capable model (`google/gemini-2.5-flash`, `openai/gpt-4o-mini`, `meta-llama/llama-3.3-70b-instruct`). |
+| OpenRouter tool call never comes | Use a tool-capable model (`nvidia/nemotron-3.5-super-vl:free`, `openai/gpt-4o-mini`, `meta-llama/llama-3.3-70b-instruct`). |
+| Agent replies come back empty (`finish_reason: length`) | Reasoning models (Nemotron among them) think in hidden tokens that eat a small token budget. The backend already sends `reasoning: {enabled: false}` to prevent this; if it happens after a model swap, pick a non-reasoning model or raise `LLM_MAX_TOKENS` in `main.py`. |
 | STT hangs over 5 s occasionally | Prisma v3.0 has a 5 s transcription-timeout budget. Retry the same clip; this is rare in practice. |

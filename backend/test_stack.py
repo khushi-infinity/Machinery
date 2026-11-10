@@ -21,7 +21,7 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent / ".env")
 GNANI_KEY = os.getenv("GNANI_API_KEY", "")
 OR_KEY = os.getenv("OR_KEY") or os.getenv("OPENROUTER_API_KEY", "")
-OR_MODEL = os.getenv("OPENROUTER_MODEL", "google/gemini-2.5-flash")
+OR_MODEL = os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3.5-super-vl:free")
 
 GNANI_BASE = "https://api.vachana.ai"
 OR_BASE = "https://openrouter.ai/api/v1"
@@ -101,6 +101,7 @@ try:
             "model": OR_MODEL,
             "temperature": 0.2,
             "max_tokens": 200,
+            "reasoning": {"enabled": False},
             "messages": [
                 {"role": "system", "content": "You are Machinery, a repair agent. Use tools before answering."},
                 {"role": "user", "content": "I'm on the printer and the extruder is clicking."},
@@ -142,6 +143,7 @@ try:
         json={
             "model": OR_MODEL,
             "max_tokens": 600,
+            "reasoning": {"enabled": False},
             "plugins": [{"id": "web", "max_results": 3}],
             "messages": [{"role": "user", "content": "What does a replacement 3D printer nozzle cost in India? One sentence."}],
         },

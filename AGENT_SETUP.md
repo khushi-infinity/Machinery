@@ -3,7 +3,7 @@
 > **Where the agent lives:** in code. The system prompt is `SYSTEM_PROMPT`
 > in `backend/main.py`; the 14 tool schemas are the Python list next to it; the
 > model that consumes them is OpenRouter (`OPENROUTER_MODEL` in
-> `backend/.env`, default `google/gemini-2.5-flash`). There is no dashboard,
+> `backend/.env`, default `nvidia/nemotron-3.5-super-vl:free`). There is no dashboard,
 > no ngrok, no config UI. Edit `main.py`, restart uvicorn, done.
 >
 > This doc is the *contract* the code implements: what the model is told and

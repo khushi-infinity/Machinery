@@ -39,7 +39,7 @@ Both keys live **only** in `backend/.env` (gitignored; template in
 `backend/.env.example`). Optional env knobs:
 
 ```bash
-OPENROUTER_MODEL=google/gemini-2.5-flash   # any tool-calling chat model
+OPENROUTER_MODEL=nvidia/nemotron-3.5-super-vl:free   # free, fast, reliable tool calls
 GNANI_TTS_VOICE=Shivani                    # any Timbre v3.0 voice
 ```
 
