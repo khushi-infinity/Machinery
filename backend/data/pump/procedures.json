@@ -1,0 +1,77 @@
+{
+  "seal_leak": {
+    "id": "seal_leak",
+    "title": "Pump is leaking from behind the casing",
+    "symptoms": ["leak", "leaking", "dripping", "weeping", "puddle", "water on the floor", "seal"],
+    "est_minutes": 40,
+    "safety": "Isolate and lock out the motor at the panel, then shut and lock BOTH the suction and discharge valves and drain the casing before you touch a bolt. Know what the pump was handling.",
+    "steps": [
+      {"n": 1, "part_id": "drain_plug", "explode": 0.0,
+       "instruction": "Before you strip anything, find where it is actually coming from. Wipe everything dry, run it for a minute, and look. Nine times out of ten the puddle is under the drain plug, not the seal.",
+       "tool": "Clean rag, torch", "check": "You have seen the drip form, not just the puddle."},
+      {"n": 2, "part_id": "mechanical_seal", "explode": 0.5,
+       "instruction": "If it is running down the shaft between the casing and the bearing housing, that is the mechanical seal. A steady drip means the faces are gone, not that it needs tightening. There is nothing to tighten.",
+       "tool": "Torch", "check": "You can see liquid tracking along the shaft, not just splash."},
+      {"n": 3, "part_id": "bearing_housing", "explode": 0.6,
+       "instruction": "Now look at the oil sight glass on the bearing housing. If the oil is cloudy or milky, the seal has been weeping long enough to get water into the bearings, and you are changing those too.",
+       "tool": "None", "check": "Oil is clear amber, not cloudy."},
+      {"n": 4, "part_id": "mechanical_seal", "explode": 0.7,
+       "instruction": "Fit a new seal. Never reuse one. Handle the faces by the edges only, clean both with IPA, and set the working length with the clips before you tighten the set screws.",
+       "tool": "Seal setting clips, IPA, lint-free cloth", "check": "Faces are spotless and the setting clips came out freely."},
+      {"n": 5, "part_id": "coupling", "explode": 0.55,
+       "instruction": "Last, before you close up, check coupling alignment. A seal that failed early almost always failed because the shaft was not running true.",
+       "tool": "Dial indicator or laser alignment tool", "check": "Radial and angular offset both inside the coupling spec."}
+    ],
+    "likely_parts": ["mechanical_seal", "bearing_front", "drain_plug"]
+  },
+  "low_flow": {
+    "id": "low_flow",
+    "title": "Pump is running but not delivering flow or head",
+    "symptoms": ["no flow", "low flow", "low pressure", "not pumping", "lost head", "weak", "cavitation", "rattling"],
+    "est_minutes": 35,
+    "safety": "If it is rattling like gravel, stop it. Running a cavitating pump destroys the impeller in hours.",
+    "steps": [
+      {"n": 1, "part_id": "suction_flange", "explode": 0.4,
+       "instruction": "Start on the suction side, always. Check the strainer is not blocked and the suction valve is fully open. More lost flow is caused by a half shut valve than by everything else combined.",
+       "tool": "None", "check": "Suction valve is fully open and the strainer is clear."},
+      {"n": 2, "part_id": "suction_flange", "explode": 0.4,
+       "instruction": "Now check that joint for air getting IN. Air leaking into the suction gives you exactly the same noise and the same lost head as cavitation, and people chase the impeller for weeks over it.",
+       "tool": "Soapy water or a vacuum gauge", "check": "No bubbles drawn at the joint under suction."},
+      {"n": 3, "part_id": "impeller", "explode": 0.85,
+       "instruction": "If suction is clean, open the casing and look at the impeller vane tips. Rounded or pitted leading edges mean it has been run dry or cavitating, and no amount of reseating brings the head back.",
+       "tool": "19 mm socket, 24 mm socket, torch", "check": "Vane tips are square and unpitted."},
+      {"n": 4, "part_id": "pump_casing", "explode": 0.6,
+       "instruction": "While it is open, measure the wear ring clearance. Over 0.8 millimetres and you are recirculating flow inside the casing instead of delivering it.",
+       "tool": "Feeler gauge or bore gauge", "check": "Clearance under 0.8 mm all round."},
+      {"n": 5, "part_id": "impeller", "explode": 0.85,
+       "instruction": "Before you fit a replacement, check the old impeller for trim marks on the outer diameter. If a previous engineer trimmed it and you fit a full size one, the motor will overload on day one.",
+       "tool": "Vernier caliper", "check": "New impeller diameter matches the old one, or the duty has been recalculated."}
+    ],
+    "likely_parts": ["impeller", "pump_casing", "suction_flange"]
+  },
+  "vibration": {
+    "id": "vibration",
+    "title": "Pump set is vibrating or noisy",
+    "symptoms": ["vibration", "vibrating", "noisy", "rumbling", "shaking", "bearing noise", "hot bearing", "growling"],
+    "est_minutes": 30,
+    "safety": "Isolate and lock out before removing the coupling guard. Never run the set with the guard off, not even briefly.",
+    "steps": [
+      {"n": 1, "part_id": "coupling", "explode": 0.5,
+       "instruction": "Pull the coupling guard and look for black rubber dust underneath. That dust is the spider being chewed up, and it means the shafts are not aligned.",
+       "tool": "10 mm spanner", "check": "No rubber dust, spider legs are square and intact."},
+      {"n": 2, "part_id": "coupling", "explode": 0.5,
+       "instruction": "Check alignment properly with an indicator, not by eye. Do it cold and again warm if the duty is hot - the pipework moves as it heats.",
+       "tool": "Dial indicator or laser alignment tool", "check": "Offset and angularity both within coupling spec."},
+      {"n": 3, "part_id": "discharge_flange", "explode": 0.45,
+       "instruction": "Slacken the discharge flange bolts and watch whether the pipe springs away. If it moves, the pipework is pulling the pump out of line and no amount of realigning will hold.",
+       "tool": "22 mm spanner, dial indicator", "check": "Flange faces meet square with the bolts out."},
+      {"n": 4, "part_id": "bearing_front", "explode": 0.7,
+       "instruction": "Only now suspect the bearings. Listen with a stethoscope or a screwdriver to your ear. A growl is the front bearing, a rumble under load is usually still alignment.",
+       "tool": "Mechanic's stethoscope", "check": "Both bearings run smooth and cool."},
+      {"n": 5, "part_id": "motor_fan", "explode": 0.5,
+       "instruction": "Do not forget the cheap one. Pull the cowl and check the motor fan for a cracked or missing blade. An unbalanced fan reads on a vibration meter exactly like a failing bearing.",
+       "tool": "10 mm spanner", "check": "All fan blades present and uncracked."}
+    ],
+    "likely_parts": ["coupling", "bearing_front", "bearing_rear", "motor_fan"]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "motor_body": {
+    "id": "motor_body", "name": "TEFC Induction Motor 7.5 kW", "sku": "TH-PM-MTR75",
+    "price_inr": 48000, "in_stock": 3, "lead_time_days": 7,
+    "torque": "Foot bolts M12 at 80 Nm, diagonal sequence",
+    "tool_required": "19 mm socket, dial indicator for realignment",
+    "service_interval": "Insulation resistance test annually, bearing regrease every 4000 h",
+    "safety": "Lock out and tag out at the panel. Verify zero volts at the terminals before you open anything.",
+    "notes": "Always recheck coupling alignment after refitting a motor. Nine out of ten repeat bearing failures are misalignment, not a bad bearing."
+  },
+  "motor_terminal_box": {
+    "id": "motor_terminal_box", "name": "Motor Terminal Box", "sku": "TH-PM-TB",
+    "price_inr": 3200, "in_stock": 6, "lead_time_days": 4,
+    "torque": "Gland nuts hand tight plus quarter turn, lid screws 3 Nm",
+    "tool_required": "Insulated screwdriver set, multimeter",
+    "service_interval": "Inspect gasket and gland seals annually",
+    "safety": "Live terminals. Lock out first. Assume it is energised until you have measured it.",
+    "notes": "A perished lid gasket lets moisture in and shows up months later as a tripped earth leakage breaker on damp mornings."
+  },
+  "motor_fan": {
+    "id": "motor_fan", "name": "Motor Cooling Fan", "sku": "TH-PM-FAN",
+    "price_inr": 1800, "in_stock": 9, "lead_time_days": 3,
+    "torque": "Circlip fit, no fasteners",
+    "tool_required": "Circlip pliers",
+    "service_interval": "Inspect for cracks at every service",
+    "safety": "Never run the motor with the cowl off.",
+    "notes": "A cracked or missing blade unbalances the rotor and reads on a vibration meter exactly like a failing bearing."
+  },
+  "fan_cowl": {
+    "id": "fan_cowl", "name": "Fan Cowl", "sku": "TH-PM-COWL",
+    "price_inr": 900, "in_stock": 12, "lead_time_days": 3,
+    "torque": "M6 screws, snug only",
+    "tool_required": "10 mm spanner",
+    "service_interval": "Clear debris monthly",
+    "safety": "This is the guard. If it is off, the motor does not run.",
+    "notes": "A cowl packed with dust is the most common cause of a motor running hot in a dusty plant."
+  },
+  "coupling": {
+    "id": "coupling", "name": "Flexible Spider Coupling", "sku": "TH-PM-CPL",
+    "price_inr": 4600, "in_stock": 5, "lead_time_days": 5,
+    "torque": "Hub grub screws 12 Nm onto the shaft flat",
+    "tool_required": "5 mm hex key, dial indicator or laser alignment tool",
+    "service_interval": "Inspect the spider every 2000 h, realign after any motor or pump removal",
+    "safety": "Guard must be refitted before the set is run. Rotating coupling, no exceptions.",
+    "notes": "Crumbling rubber dust under the guard means misalignment. Replace the spider AND fix the alignment, or the new one lasts a fortnight."
+  },
+  "shaft": {
+    "id": "shaft", "name": "Pump Shaft (EN8)", "sku": "TH-PM-SHFT",
+    "price_inr": 8500, "in_stock": 2, "lead_time_days": 12,
+    "torque": "Impeller nut 45 Nm, left hand thread",
+    "tool_required": "24 mm socket, dial indicator",
+    "service_interval": "Runout checked at every seal change",
+    "safety": "None once isolated.",
+    "notes": "Runout over 0.05 mm at the seal face will eat mechanical seals no matter how carefully you fit them."
+  },
+  "bearing_housing": {
+    "id": "bearing_housing", "name": "Bearing Housing", "sku": "TH-PM-BHSG",
+    "price_inr": 12000, "in_stock": 1, "lead_time_days": 15,
+    "torque": "End cover bolts 25 Nm",
+    "tool_required": "17 mm socket, bearing puller",
+    "service_interval": "Oil change every 4000 h, level checked weekly",
+    "safety": "Hot after running. Let it cool.",
+    "notes": "Cloudy oil in the sight glass means water ingress past the lip seal. Change the oil and the seal together or you will be back next month."
+  },
+  "bearing_front": {
+    "id": "bearing_front", "name": "Front Bearing 6308-2RS", "sku": "TH-PM-BRG-F",
+    "price_inr": 2400, "in_stock": 8, "lead_time_days": 4,
+    "torque": "Interference fit. Heat to 110 C in an induction heater, never hammer.",
+    "tool_required": "Induction bearing heater, bearing puller",
+    "service_interval": "Replace at 25000 h or at first vibration alarm",
+    "safety": "Heated bearings burn. Gloves.",
+    "notes": "This is the one that fails first, because it takes the radial load from the impeller and it sits closest to any seal that is weeping."
+  },
+  "bearing_rear": {
+    "id": "bearing_rear", "name": "Rear Bearing 6306-2RS", "sku": "TH-PM-BRG-R",
+    "price_inr": 1900, "in_stock": 8, "lead_time_days": 4,
+    "torque": "Interference fit. Heat to 110 C, never hammer.",
+    "tool_required": "Induction bearing heater, bearing puller",
+    "service_interval": "Replace in pairs with the front bearing",
+    "safety": "Heated bearings burn. Gloves.",
+    "notes": "Always replace both. Fitting one new bearing against one worn one just moves the vibration."
+  },
+  "mechanical_seal": {
+    "id": "mechanical_seal", "name": "Mechanical Seal 35 mm (SiC/Carbon)", "sku": "TH-PM-SEAL35",
+    "price_inr": 7800, "in_stock": 4, "lead_time_days": 6,
+    "torque": "Set screws 6 Nm after setting the working length",
+    "tool_required": "Seal setting clips, IPA and lint-free cloth",
+    "service_interval": "Replace at every casing opening. They are not reusable.",
+    "safety": "Handle faces by the edges only. A fingerprint on the seal face will make it leak.",
+    "notes": "Never run this pump dry, even for two seconds. The faces are lubricated by the liquid and they cook instantly without it."
+  },
+  "pump_casing": {
+    "id": "pump_casing", "name": "Volute Casing (Cast Iron)", "sku": "TH-PM-CAS",
+    "price_inr": 26000, "in_stock": 1, "lead_time_days": 25,
+    "torque": "Casing bolts 55 Nm, crossed sequence, in three passes",
+    "tool_required": "19 mm socket, torque wrench",
+    "service_interval": "Wear ring clearance checked at every overhaul",
+    "safety": "Drain and depressurise before opening. Confirm the line is isolated on BOTH sides.",
+    "notes": "Wear ring clearance over 0.8 mm costs you head and efficiency long before anything sounds wrong."
+  },
+  "impeller": {
+    "id": "impeller", "name": "Closed Impeller 180 mm (Bronze)", "sku": "TH-PM-IMP180",
+    "price_inr": 18500, "in_stock": 2, "lead_time_days": 18,
+    "torque": "Retaining nut 45 Nm, LEFT HAND thread",
+    "tool_required": "24 mm socket, impeller holding tool",
+    "service_interval": "Inspect at every casing opening",
+    "safety": "Sharp vane edges. Gloves.",
+    "notes": "Rounded or pitted vane tips mean cavitation or dry running. Trim marks on the outer diameter are from a previous impeller trim - record them before you fit a full size replacement or the motor will overload."
+  },
+  "casing_cover": {
+    "id": "casing_cover", "name": "Casing Cover Plate", "sku": "TH-PM-COV",
+    "price_inr": 9200, "in_stock": 2, "lead_time_days": 20,
+    "torque": "Cover bolts 40 Nm, crossed sequence",
+    "tool_required": "17 mm socket, torque wrench",
+    "service_interval": "New gasket at every opening",
+    "safety": "Depressurise and drain first.",
+    "notes": "Never reuse the gasket. It costs eighty rupees and it is the reason the joint weeps a week later."
+  },
+  "suction_flange": {
+    "id": "suction_flange", "name": "Suction Flange DN80", "sku": "TH-PM-FLG80",
+    "price_inr": 3400, "in_stock": 4, "lead_time_days": 10,
+    "torque": "Flange bolts 60 Nm, crossed, three passes",
+    "tool_required": "24 mm spanner, torque wrench",
+    "service_interval": "Gasket at every disconnection",
+    "safety": "Confirm the line is isolated and drained before you crack the first bolt.",
+    "notes": "Air leaking IN through this joint causes exactly the same symptoms as cavitation, and people chase the impeller for weeks instead."
+  },
+  "discharge_flange": {
+    "id": "discharge_flange", "name": "Discharge Flange DN65", "sku": "TH-PM-FLG65",
+    "price_inr": 2900, "in_stock": 4, "lead_time_days": 10,
+    "torque": "Flange bolts 55 Nm, crossed, three passes",
+    "tool_required": "22 mm spanner, torque wrench",
+    "service_interval": "Gasket at every disconnection",
+    "safety": "This side holds pressure. Verify the discharge valve is shut and the line is vented.",
+    "notes": "Pipe strain here transmits straight into the bearing housing. If the flange does not meet square without forcing, fix the pipework, not the pump."
+  },
+  "drain_plug": {
+    "id": "drain_plug", "name": "Casing Drain Plug 1/2 BSP", "sku": "TH-PM-DRN",
+    "price_inr": 240, "in_stock": 20, "lead_time_days": 2,
+    "torque": "35 Nm with fresh PTFE tape",
+    "tool_required": "22 mm spanner, PTFE tape",
+    "service_interval": "Retape at every drain",
+    "safety": "Contents may be hot or aggressive. Know what the pump was handling before you open it.",
+    "notes": "Cheapest part on the machine and the most common source of a mystery puddle."
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "helium_boiloff": {
+    "id": "helium_boiloff",
+    "title": "Helium level dropping faster than normal",
+    "symptoms": ["helium", "boil off", "boiloff", "level dropping", "cryogen", "he level", "losing helium"],
+    "est_minutes": 35,
+    "safety": "Equipment room work is normal-tool. The magnet room is not - the magnet is always on, even with the system powered down. Nothing ferrous past the 5 gauss line.",
+    "steps": [
+      {"n": 1, "part_id": "he_level_sensor", "explode": 0.0,
+       "instruction": "Pull the helium level trend, not just today's number. You want percent per day over the last thirty days. Normal is under 0.05 percent a day.",
+       "tool": "Service console", "check": "You have a thirty day trend line, not a single reading."},
+      {"n": 2, "part_id": "cold_head", "explode": 0.35,
+       "instruction": "Go into the magnet room and just listen to the cold head. It should tick at about one beat a second, perfectly even. A knock, a stutter or a dead beat is your answer.",
+       "tool": "Your ears", "check": "Rhythm is even and about 1 Hz."},
+      {"n": 3, "part_id": "cold_head", "explode": 0.35,
+       "instruction": "Check its running hours against the log. These are due at three years or twenty six thousand hours, whichever lands first.",
+       "tool": "Service console", "check": "Hours are under the replacement threshold."},
+      {"n": 4, "part_id": "compressor", "explode": 0.55,
+       "instruction": "Now the equipment room. Read compressor static pressure with the system idle. You want 225 psi at 20 degrees. Low static means a helium leak in the loop and the cold head is starving.",
+       "tool": "Helium pressure gauge set", "check": "Static pressure within 10 psi of 225."},
+      {"n": 5, "part_id": "cryostat", "explode": 0.7,
+       "instruction": "Last, walk the cryostat and look for frost anywhere on the outer shell. Frost means the vacuum has failed. If you see any, stop, do not touch it, and escalate to the OEM immediately.",
+       "tool": "None", "check": "No frost, no condensation anywhere on the outer surface."}
+    ],
+    "likely_parts": ["cold_head", "compressor", "he_level_sensor"]
+  },
+  "zipper_artifact": {
+    "id": "zipper_artifact",
+    "title": "Zipper or herringbone artifact across images",
+    "symptoms": ["zipper", "artifact", "herringbone", "rf noise", "interference", "stripes", "spike noise", "image noise"],
+    "est_minutes": 25,
+    "safety": "Standard tools are fine at the door and penetration panel - both sit at the room boundary. Do not carry the RF leak detector into the bore.",
+    "steps": [
+      {"n": 1, "part_id": "penetration_panel", "explode": 0.0,
+       "instruction": "First question, and it solves this most of the time: what changed in this room recently? New monitor, a contractor's cable, a nurse call system. Ask the department, not the log.",
+       "tool": "None", "check": "You have a list of anything installed in the last three months."},
+      {"n": 2, "part_id": "rf_door_seal", "explode": 0.3,
+       "instruction": "Run a fingertip along the entire door perimeter, over the finger stock. You are feeling for bent, flattened or missing strips. You will feel a gap before any instrument finds it.",
+       "tool": "Your hand", "check": "Finger stock is continuous and springy the whole way round."},
+      {"n": 3, "part_id": "penetration_panel", "explode": 0.5,
+       "instruction": "Open the penetration panel and look for any cable that goes straight through without a filter. An unfiltered cable is an antenna feeding noise directly into your images.",
+       "tool": "Standard kit", "check": "Every conductor through the panel passes a filter."},
+      {"n": 4, "part_id": "rf_door_seal", "explode": 0.3,
+       "instruction": "Now run an RF noise scan with the door shut, then again with it open a centimetre. If the artifact worsens with the door cracked, it is the shield, not the system.",
+       "tool": "Service console, RF leak detector", "check": "Noise floor is flat with the door properly closed."}
+    ],
+    "likely_parts": ["rf_door_seal", "penetration_panel"]
+  },
+  "gradient_overheat": {
+    "id": "gradient_overheat",
+    "title": "Gradient over-temperature shutdown mid-scan",
+    "symptoms": ["gradient", "overheat", "over temperature", "thermal shutdown", "scan aborts", "coil temp", "too hot"],
+    "est_minutes": 30,
+    "safety": "Lock out and verify zero volts before opening the gradient amplifier. There are several hundred volts on the busbars.",
+    "steps": [
+      {"n": 1, "part_id": "chiller", "explode": 0.4,
+       "instruction": "Start at the chiller, always. Pull the filter and look at it. A blocked filter is a two hundred rupee fix, and it causes this fault far more often than anything expensive does.",
+       "tool": "Standard kit", "check": "Filter is clean and flow rate is at OEM spec."},
+      {"n": 2, "part_id": "chiller", "explode": 0.4,
+       "instruction": "Check the coolant setpoint and the actual return temperature. If return is more than 3 degrees above setpoint under load, the chiller cannot keep up.",
+       "tool": "Standard kit, thermometer", "check": "Return temperature within 3 degrees of setpoint at full duty."},
+      {"n": 3, "part_id": "gradient_amplifier", "explode": 0.6,
+       "instruction": "Now read the amplifier fault log before you touch anything. It will usually name the axis that tripped, which tells you whether this is thermal or electrical.",
+       "tool": "Service console", "check": "You know which axis tripped and at what temperature."},
+      {"n": 4, "part_id": "gradient_coil", "explode": 0.75,
+       "instruction": "Only now look at the coil temperature sensors themselves. Do not condemn a gradient coil until the chiller and the amplifier are both proven good - this part is one point two crore and ninety days out.",
+       "tool": "Service console", "check": "Sensor readings agree with each other within 2 degrees."},
+      {"n": 5, "part_id": "gradient_coil", "explode": 0.75,
+       "instruction": "As a stopgap while a part is on order, ask the department to drop to lower duty cycle protocols. It keeps the site scanning instead of dark.",
+       "tool": "None", "check": "Department has a reduced protocol list they can run."}
+    ],
+    "likely_parts": ["chiller", "gradient_amplifier", "gradient_coil"]
+  },
+  "low_snr_head_coil": {
+    "id": "low_snr_head_coil",
+    "title": "Poor image quality or low SNR on the head coil",
+    "symptoms": ["snr", "signal to noise", "grainy", "poor image", "head coil", "image quality", "shading", "dark images"],
+    "est_minutes": 20,
+    "safety": "Do not scan a patient with a damaged coil. Broken elements can concentrate RF and cause burns.",
+    "steps": [
+      {"n": 1, "part_id": "head_coil", "explode": 0.3,
+       "instruction": "Swap in a known good coil and rescan the same phantom. This one test splits the problem in half - coil or system - in under five minutes.",
+       "tool": "Spare coil, QA phantom", "check": "You know whether the fault follows the coil or stays with the system."},
+      {"n": 2, "part_id": "head_coil", "explode": 0.3,
+       "instruction": "If it follows the coil, look at the connector pins under a light. Bent, recessed or green pins are common and they are often the whole fault.",
+       "tool": "Inspection light", "check": "All pins straight, bright and at equal height."},
+      {"n": 3, "part_id": "head_coil", "explode": 0.3,
+       "instruction": "Run the per-element check. A 32 channel coil hides two dead elements well - the images just look slightly soft, and nobody reports it for months.",
+       "tool": "Service console", "check": "All 32 elements within 20 percent of each other."},
+      {"n": 4, "part_id": "rf_body_coil", "explode": 0.55,
+       "instruction": "If the fault stayed with the system rather than the coil, it is the body coil tune. That is a network analyser job and a different visit - stop here and escalate.",
+       "tool": "Network analyser", "check": "Escalation raised with tune data attached."}
+    ],
+    "likely_parts": ["head_coil", "rf_body_coil"]
+  },
+  "quench_emergency": {
+    "id": "quench_emergency",
+    "title": "QUENCH - magnet venting, emergency response",
+    "symptoms": ["quench", "venting", "loud bang", "fog", "cloud in the room", "oxygen alarm", "emergency", "magnet down"],
+    "est_minutes": 45,
+    "safety": "STOP. Do not enter the magnet room. A quench dumps over a thousand litres of liquid helium which expands roughly 750 times into gas and displaces the oxygen. People die of asphyxiation in quench events, not of cold.",
+    "steps": [
+      {"n": 1, "part_id": "erdu", "explode": 0.0,
+       "instruction": "Evacuate everyone from the magnet room and shut the door. Do not go in to help unless a person is in there. If someone is trapped, the door may be hard to open because of the pressure - push hard, that is normal.",
+       "tool": "None", "check": "Room is clear and the door is closed."},
+      {"n": 2, "part_id": "erdu", "explode": 0.0,
+       "instruction": "Check the oxygen monitor. If it reads below nineteen point five percent, nobody enters, no exceptions, not even to retrieve equipment. Wait for it to clear.",
+       "tool": "Room oxygen monitor", "check": "Oxygen back above 19.5 percent before anyone enters."},
+      {"n": 3, "part_id": "quench_pipe", "explode": 0.5,
+       "instruction": "From outside, check the quench pipe discharge. It should be venting to open air outside the building. If gas is coming into the room instead, the pipe has failed and this is now a fire brigade call, not a service call.",
+       "tool": "None", "check": "All discharge is going outside the building."},
+      {"n": 4, "part_id": "magnet_coil", "explode": 0.7,
+       "instruction": "Assume the field is gone but verify it before letting anyone bring anything ferrous near. Use a handheld gaussmeter at the door. Never assume from the console alone.",
+       "tool": "Handheld gaussmeter", "check": "Measured field at the door is near zero."},
+      {"n": 5, "part_id": "magnet_coil", "explode": 0.7,
+       "instruction": "Do not attempt to re-ramp. That is an OEM job with their equipment, roughly forty lakh in helium and about a week of downtime. Log everything you saw and heard - they will ask.",
+       "tool": "None", "check": "OEM notified and a written timeline of events exists."}
+    ],
+    "likely_parts": ["quench_pipe", "erdu"]
+  }
+}

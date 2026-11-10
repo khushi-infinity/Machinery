@@ -1,0 +1,112 @@
+{
+  "first_layer_not_sticking": {
+    "id": "first_layer_not_sticking",
+    "title": "First layer will not stick to the bed",
+    "symptoms": ["first layer not sticking", "print comes loose", "spaghetti", "warping", "bed adhesion"],
+    "est_minutes": 12,
+    "safety": "Bed may be at 60 C. Warm, not dangerous, but do not rest your forearm on it.",
+    "steps": [
+      {"n": 1, "part_id": "bed_glass", "explode": 0.0,
+       "instruction": "Pull the spring steel sheet off and wash it with dish soap and warm water. Not IPA - IPA smears the oil around. Dry it with a clean cloth and put it back without touching the print area.",
+       "tool": "None", "check": "Water should sheet off evenly, not bead up."},
+      {"n": 2, "part_id": "bed_spring", "explode": 0.2,
+       "instruction": "Home the printer, disable the steppers, then slide a sheet of paper under the nozzle at each of the four corners. You want light drag on the paper, not a scrape.",
+       "tool": "A sheet of A4 paper", "check": "Same drag feel at all four corners."},
+      {"n": 3, "part_id": "nozzle", "explode": 0.35,
+       "instruction": "Now set the live Z offset. Start a print, and while the skirt is laying down turn the offset down until the line looks like a squashed oval, not a round noodle.",
+       "tool": "None", "check": "Extruded line is about 0.2 mm tall and touching its neighbour."},
+      {"n": 4, "part_id": "bed_glass", "explode": 0.0,
+       "instruction": "If it still lifts at the corners, add a 5 mm brim in the slicer and raise the bed to 65 C for the first layer only.",
+       "tool": "None", "check": "Corners stay down for the first ten layers."}
+    ],
+    "likely_parts": ["bed_glass", "bed_spring"]
+  },
+  "extruder_clicking": {
+    "id": "extruder_clicking",
+    "title": "Extruder is clicking and under-extruding",
+    "symptoms": ["clicking", "ticking", "under extrusion", "gaps in walls", "no filament coming out", "skipping"],
+    "est_minutes": 20,
+    "safety": "The hotend will be at 200-240 C. Use pliers, never bare fingers, and keep the fan side away from you.",
+    "steps": [
+      {"n": 1, "part_id": "extruder_gear", "explode": 0.3,
+       "instruction": "Open the extruder arm and look at the drive gear teeth. If they are packed with filament dust, that is your click. Pick them clean with a needle or a stiff brush.",
+       "tool": "1.5 mm hex key, needle", "check": "Teeth are sharp and clear of dust."},
+      {"n": 2, "part_id": "ptfe_tube", "explode": 0.5,
+       "instruction": "Pop the collet and pull the PTFE tube out. Look at the end that meets the nozzle. If it is browned or belled out, cut 10 mm off with a square cut and reseat it so it bottoms out hard against the nozzle.",
+       "tool": "Sharp flush cutter", "check": "No visible gap when you push the tube home."},
+      {"n": 3, "part_id": "nozzle", "explode": 0.7,
+       "instruction": "Heat to 240 C and do a cold pull. Push filament through by hand, drop to 90 C, then yank. The plug should come out shaped like the inside of the nozzle.",
+       "tool": "Pliers", "check": "The pulled tip is a clean cone with no black flecks."},
+      {"n": 4, "part_id": "nozzle", "explode": 0.7,
+       "instruction": "If the cold pull comes out black or ragged, replace the nozzle. Heat to 240 C first, back the old one out, and tighten the new one hot - hand tight plus an eighth turn.",
+       "tool": "7 mm socket wrench", "check": "No ooze from the nozzle-to-block seam at temperature."},
+      {"n": 5, "part_id": "hotend_fan", "explode": 0.6,
+       "instruction": "Last, spin the heatsink fan with a fingertip while it is running. If it stutters or rattles, it is stalling mid-print and cooking the filament above the heatbreak. That comes back as a clog every single time.",
+       "tool": "None", "check": "Fan spins smooth and silent at full speed."}
+    ],
+    "likely_parts": ["nozzle", "ptfe_tube", "hotend_fan", "extruder_gear"]
+  },
+  "layer_shift": {
+    "id": "layer_shift",
+    "title": "Layers shifted partway through the print",
+    "symptoms": ["layer shift", "print is offset", "stepped print", "misaligned layers", "ghosting"],
+    "est_minutes": 15,
+    "safety": "Power the printer off before you put a spanner near the gantry.",
+    "steps": [
+      {"n": 1, "part_id": "x_belt", "explode": 0.25,
+       "instruction": "Pluck the X belt like a guitar string. You want a low, dull note. If it flaps, take up the tensioner until it sings.",
+       "tool": "2 mm hex key", "check": "Belt deflects less than 5 mm under a firm push."},
+      {"n": 2, "part_id": "gantry_wheel", "explode": 0.4,
+       "instruction": "Grab the print head and try to rock it toward and away from the gantry. Any wobble means the eccentric nut is loose. Turn it until the wheel just barely drags under your finger.",
+       "tool": "8 mm spanner", "check": "No rock, but the head still glides with one finger."},
+      {"n": 3, "part_id": "y_belt", "explode": 0.25,
+       "instruction": "Same pluck test on the Y belt under the bed. A loose Y belt shows up as ghosting on the front face before it ever shifts a layer.",
+       "tool": "2 mm hex key", "check": "Same note as the X belt."},
+      {"n": 4, "part_id": "mainboard", "explode": 0.8,
+       "instruction": "If the shift happens at the same height every time, it is not mechanical. Drop your print speed to 50 mm/s and acceleration to 500. A stepper driver skipping under load will do exactly this.",
+       "tool": "None", "check": "Reprint completes without a shift at that height."}
+    ],
+    "likely_parts": ["x_belt", "y_belt", "gantry_wheel"]
+  },
+  "stringing": {
+    "id": "stringing",
+    "title": "Print is covered in fine strings",
+    "symptoms": ["stringing", "webbing", "hairs", "wispy", "oozing"],
+    "est_minutes": 8,
+    "safety": "None, this is a slicer and filament problem.",
+    "steps": [
+      {"n": 1, "part_id": "filament_spool", "explode": 0.0,
+       "instruction": "Before you touch retraction settings - has this spool been open more than two weeks? Wet PLA pops and strings and no setting will fix it. Dry it at 50 C for four hours.",
+       "tool": "Filament dryer or a food dehydrator", "check": "No crackling sound at the nozzle while extruding."},
+      {"n": 2, "part_id": "nozzle", "explode": 0.5,
+       "instruction": "Drop the nozzle temperature by 10 C and print a retraction tower. Most stringing is simply running 15 C too hot.",
+       "tool": "None", "check": "Strings thin out on the lower, cooler bands of the tower."},
+      {"n": 3, "part_id": "ptfe_tube", "explode": 0.5,
+       "instruction": "On a Bowden setup, set retraction to 5 mm at 45 mm/s. On direct drive, 0.8 mm at 35 mm/s. Going higher on Bowden just grinds the filament.",
+       "tool": "None", "check": "Travel moves leave no visible hair."}
+    ],
+    "likely_parts": ["filament_spool"]
+  },
+  "thermal_runaway": {
+    "id": "thermal_runaway",
+    "title": "Thermal runaway error, printer halts mid-print",
+    "symptoms": ["thermal runaway", "heating failed", "temperature drop", "printer stops", "err min temp"],
+    "est_minutes": 18,
+    "safety": "STOP. Unplug the printer at the wall before opening anything. This fault class is the one that starts fires.",
+    "steps": [
+      {"n": 1, "part_id": "hotend_fan", "explode": 0.5,
+       "instruction": "Unplug at the wall. Check that the heatsink fan actually spins whenever the hotend is above 50 C. A dead fan is the most common cause and the most dangerous one.",
+       "tool": "None", "check": "Fan runs the instant the hotend passes 50 C."},
+      {"n": 2, "part_id": "heatbreak", "explode": 0.7,
+       "instruction": "Check that the heater cartridge and the thermistor are both seated fully in the heater block and their grub screws are tight. A thermistor that has crept out reads cold, so firmware pushes more power. That is the runaway.",
+       "tool": "1.5 mm hex key", "check": "Neither cartridge nor thermistor moves when tugged gently."},
+      {"n": 3, "part_id": "heatbreak", "explode": 0.7,
+       "instruction": "Look at the silicone sock and the wiring where it enters the block. Any browning, melting or exposed copper and you stop here and replace the whole hotend assembly.",
+       "tool": "None", "check": "Insulation is intact along the full run."},
+      {"n": 4, "part_id": "mainboard", "explode": 0.9,
+       "instruction": "Finally confirm thermal runaway protection is enabled in firmware. If a previous owner disabled it to stop nuisance errors, do not use this printer until it is back on.",
+       "tool": "None", "check": "THERMAL_PROTECTION_HOTENDS is enabled."}
+    ],
+    "likely_parts": ["hotend_fan", "heatbreak", "mainboard"]
+  }
+}
