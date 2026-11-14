@@ -20,7 +20,7 @@ services:
       - key: TOOL_SECRET
         generateValue: true
       - key: FRONTEND_URL
-        value: https://machinery-frontend.onrender.com
+        value: https://machinery-frontend-iqod.onrender.com
 
   - type: web
     name: machinery-frontend
@@ -30,4 +30,4 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: https://machinery-backend.onrender.com
+        value: https://machinery-backend-i2qk.onrender.com
