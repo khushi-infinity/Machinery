@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { apiUrl } from '../api'
 import { useScene } from '../store'
 import { partById } from '../machines'
 import type { WebSource } from '../voiceAgent'
@@ -44,7 +45,7 @@ export function Panel({ sources }: { sources?: WebSource[] }) {
     let alive = true
     const tick = async () => {
       try {
-        const r = await fetch('/api/session')
+        const r = await fetch(apiUrl('/api/session'))
         if (r.ok && alive) setS(await r.json())
       } catch { /* backend not up yet */ }
     }

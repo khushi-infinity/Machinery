@@ -16,6 +16,7 @@
 import { useEffect, useRef, useState, type MutableRefObject } from 'react'
 import { clientTools } from './clientTools'
 import { useScene } from './store'
+import { apiUrl } from './api'
 
 export type VoiceStatus = 'idle' | 'listening' | 'thinking' | 'speaking'
 export interface WebSource {
@@ -121,7 +122,7 @@ async function runTurn(blob: Blob, ctx: {
   const wav = await toWav16k(blob, actx)
   const fd = new FormData()
   fd.append('file', wav, 'utterance.wav')
-  const sttRes = await fetch('/api/stt', { method: 'POST', body: fd, signal })
+  const sttRes = await fetch(apiUrl('/api/stt'), { method: 'POST', body: fd, signal })
   if (!sttRes.ok) throw new Error(`stt ${sttRes.status}: ${(await sttRes.text()).slice(0, 160)}`)
   const { text, language } = (await sttRes.json()) as { text?: string; language?: string }
   const heard = (text ?? '').trim()
@@ -130,7 +131,7 @@ async function runTurn(blob: Blob, ctx: {
 
   // 2. brain - STREAMED: each scene tool fires on screen the moment the model
   //    queues it, while the model is still composing the final reply.
-  const turnRes = await fetch('/api/agent/turn', {
+  const turnRes = await fetch(apiUrl('/api/agent/turn'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -256,7 +257,7 @@ async function speak(text: string, language: string, ctx: SpeakCtx) {
   const { setStatusBoth, signal } = ctx
   const chunks = splitForTts(text)
   const synth = async (t: string): Promise<Blob> => {
-    const res = await fetch('/api/tts', {
+    const res = await fetch(apiUrl('/api/tts'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: t, language }),

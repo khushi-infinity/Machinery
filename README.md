@@ -446,3 +446,19 @@ When `get_procedure` matches, the backend pre-fires step 1's scene tools
 - [OpenRouter](https://openrouter.ai): the reasoning LLM and the live-web
   search plugin
 - React, react-three-fiber, zustand, Vite, FastAPI, httpx
+
+## Deploying on Render
+
+The repository includes [`render.yaml`](render.yaml), which defines two Render
+services:
+
+1. `machinery-backend`: FastAPI web service under `backend/`
+2. `machinery-frontend`: Vite static site under `frontend/`
+
+In Render, choose **New → Blueprint**, connect this repository, and apply the
+Blueprint. Add the values for `GNANI_API_KEY`, `GROQ_API_KEY`, and
+`OPENROUTER_API_KEY` when prompted. The frontend is built with
+`VITE_API_URL=https://machinery-backend.onrender.com`, and the backend accepts
+requests from `https://machinery-frontend.onrender.com`.
+
+Do not commit `backend/.env`; enter its values as Render environment variables.

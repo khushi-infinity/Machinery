@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: machinery-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: GNANI_API_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GNANI_TTS_VOICE
+        value: Shivani
+      - key: TOOL_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://machinery-frontend.onrender.com
+
+  - type: web
+    name: machinery-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://machinery-backend.onrender.com

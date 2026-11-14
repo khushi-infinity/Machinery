@@ -20,6 +20,7 @@
 
 import { useScene } from './store'
 import { partById, resolvePartId, resolveMachineId, selectableParts, getMachine } from './machines'
+import { apiUrl } from './api'
 
 const say = (text: string) =>
   useScene.getState().push({ role: 'tool', text, ts: Date.now() })
@@ -35,7 +36,7 @@ const partList = () =>
  *  (get_procedure, lookup_part) scope to the right catalogue. */
 async function syncMachineToBackend(machineId: string) {
   try {
-    await fetch('/api/machine', {
+    await fetch(apiUrl('/api/machine'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ machine: machineId }),
